@@ -1,0 +1,1 @@
+[["../res/FEMME/V\u00eatements/Chemises", "https://www.printemps.com/fr/fr/chemises-femme"], ["../res/FEMME/V\u00eatements/Combinaisons", "https://www.printemps.com/fr/fr/combinaisons-femme"], ["../res/FEMME/V\u00eatements/Jeans", "https://www.printemps.com/fr/fr/jeans-femme"]]
