@@ -105,6 +105,8 @@ def get_szs(url):
         return [sz]
     else:
         szs = []
+        if szs_ph.json() == []:
+            return [sz]
         szsdbs = szs_ph.json().keys()
         for szsb in szsdbs:
             szn = szs_ph.json()[szsb]['label']
