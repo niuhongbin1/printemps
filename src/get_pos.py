@@ -5,10 +5,7 @@
 
 # import requests
 from lxml import etree
-import time 
-import re
-import json
-import logging
+from loguru import logger 
 import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
@@ -41,12 +38,12 @@ def requ_repeat(link,err_txt,par=None,mod='get',data=None,headers=None):
                 return response
             else:
                 count = count + 1
-                print(link+err_txt+'  获取重试' + str(count))
+                logger.warning(link+err_txt+'  获取重试' + str(count))
                 pass
         except Exception as e:
-            print(e,link)
+            logger.warning(str(e)+'---'+link)
             count = count + 1
-            print(err_txt+'  获取重试' + str(count))
+            logger.warning(err_txt+'  获取重试' + str(count))
         
     return False
 
@@ -96,7 +93,7 @@ def data(a,pid,purl):
             pj = response.json()
             return [pj,True]
     except:
-        print('获取产品列表失败')
+        logger.warning('获取产品列表失败')
         return [False,False]
 
 
@@ -142,7 +139,6 @@ def main(url):
         
         
 def out(cgid):
-    # print('-----------  print  ----------')
     return main(cgid)
 
 if __name__ == '__main__':

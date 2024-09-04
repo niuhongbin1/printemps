@@ -1,4 +1,4 @@
-from log import logger
+# from log import logger
 import get_pos
 import detail
 import classify
@@ -9,7 +9,9 @@ import sys
 import clear_dir
 import threading
 import time
-
+from loguru import logger
+import os 
+from datetime import datetime
 
 
 
@@ -164,6 +166,15 @@ def main():
         deal_err(ers)
     print('运行完成')
 if __name__ == '__main__':
+    # 配置日志输出到文件和控制台
+    log_folder = "log"
+    os.makedirs(log_folder, exist_ok=True)
+
+    # 配置日志文件的路径和文件名格式
+    log_file = os.path.join(log_folder, f"{datetime.now():%Y-%m-%d_%H-%M-%S}.log")
+
+    # 配置日志输出到文件和控制台
+    logger.add(log_file, rotation="70 MB", retention="10 days", level="DEBUG")
     main()
     exit()
 

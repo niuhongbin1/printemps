@@ -57,6 +57,8 @@ def jnn(n):
   
     if "Toutl'univer" in n:
         return True
+    elif "Vior" in n:
+        return True
     else:
         return False
 
@@ -99,6 +101,9 @@ def n3(li):
             du = i.xpath('./a/@href')[0]
         except:
             print('三级分类名称出错')
+            continue
+        just = jnn(name)
+        if just:
             continue
         ff = {
                 'name':name,

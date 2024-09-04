@@ -6,7 +6,7 @@ import re
 import json
 import random
 import fake_useragent
-
+from loguru import logger
 
 def requ_repeat(link,err_txt,par=None,hes = None):
     """ 用于多次重试
@@ -39,12 +39,11 @@ def requ_repeat(link,err_txt,par=None,hes = None):
                 return response
             else:
                 count = count + 1
-                print(err_txt+'  获取重试' + str(count))
+                logger.warning(err_txt+'  获取重试' + str(count))
                 pass
         except Exception as e:
-            # print(e)
             count = count + 1
-            print(err_txt+'  获取重试' + str(count))
+            logger.warning(err_txt+'  获取重试' + str(count) +'\n'+str(e))
         
     return False
 
@@ -58,7 +57,7 @@ def get_html(url):
         
         return response.text
     except Exception as e:
-        print(url,'请求失败',e)
+        logger.warning(url+'请求失败'+e)
         return False
 
     
@@ -149,14 +148,14 @@ def get_mat(p):
         
         return mat
     except:
-        print("mat error")
+        logger.warning("mat error")
         return None
     
 
 
 def get_id(p):
     t = p
-    id = re.findall('Référence(.*?\\|)',t)
+    id = re.findall('Référence(.*?\\|)',t,re.DOTALL)
     if len(id) == 0:
         return None
     else:
@@ -208,5 +207,5 @@ def out(pdd):
     return main(pdd)
 
 if __name__ == '__main__':
-    pdd = 'https://www.printemps.com/fr/fr/naked-wolfe-bottines-secret-noir-femme-7472067'
+    pdd = 'https://www.printemps.com/fr/fr/naked-wolfe-sandales-a-talon-en-cuir-blanc-femme-6294649'
     out(pdd) 
