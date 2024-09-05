@@ -60,11 +60,6 @@ def get_html(url):
         logger.warning(url+'请求失败'+e)
         return False
 
-    
-
-  
-
-
 
 
 
@@ -155,11 +150,16 @@ def get_mat(p):
     
 
 
-def get_id(p):
+def get_id(p,url):
     t = p
     id = re.findall('Référence(.*?\\|)',t,re.DOTALL)
     if len(id) == 0:
-        return None
+        id = re.findall('Référence(.*?)</p>',t,re.DOTALL)
+        if len(id) == 0:
+            id = url.split('-')[-1]
+            return id
+        else:    
+            return id[0].replace(' ','').replace('\n','').replace('\t','').replace(':','').replace(' ','').replace('|','').replace('</span>','')
     else:
         return id[0].replace(' ','').replace('\n','').replace('\t','').replace(':','').replace(' ','').replace('|','').replace('</span>','')
     
@@ -185,7 +185,7 @@ def deal(p,url):
         imgs = imgs + i + ','
         if imglen >= 3:
             break
-    id = get_id(p)
+    id = get_id(p,url)
     szs = get_szs(url)
     # 汇总为二维列表
     des = []
