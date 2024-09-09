@@ -171,7 +171,10 @@ def deal(p,url):
         return [[url,'','err','err','err']]
     name = info_j["name"]
     desp = info_j['description']
-
+    try:
+        brand = info_j['brand']['name']
+    except:
+        brand = None
     # pr = info_j['offers']['price'] 
     mat = get_mat(p)
     try:
@@ -191,7 +194,7 @@ def deal(p,url):
     des = []
     for sz in szs:
         # [['货号','价格','大小','l3','折前价格','名称',"MATERIAL","COLOR", "SIZE CHART TYPE",'DESCRIPTION','img url']]
-        des.append([id,sz["pr"],sz['sn'],sz['soa'],sz['sku'],name,mat,col,None,desp,imgs,url])
+        des.append([id,sz["pr"],sz['sn'],sz['soa'],sz['sku'],name,mat,col,brand,desp,imgs,url])
     return des
 
 
